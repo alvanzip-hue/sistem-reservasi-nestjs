@@ -351,26 +351,12 @@ Urutan pengujian (jalankan berurutan di Postman):
 | 10  | Booking ulang di slot yang sama   | `POST /bookings` (18:00–19:00)                | 201 (slot sudah bebas lagi)                   |
 | 11  | Batalkan booking yang sudah batal | `PATCH /bookings/1/cancel`                    | 409                                           |
 
-## Bukti Pengujian
-
-Postman collection: `postman/reservasi-lapangan.postman_collection.json`
-
-_(Tambahkan screenshot hasil pengujian Postman di sini.)_
-
 ## Struktur Project
 
 ```
 src/
 ├── app.module.ts
 ├── main.ts
-├── fields/
-│   ├── fields.controller.ts
-│   ├── fields.service.ts
-│   └── fields.module.ts
-└── bookings/
-    ├── bookings.controller.ts
-    ├── bookings.service.ts
-    └── bookings.module.ts
+├── app.controller.ts
+├── app.service.ts
 ```
-
-> Sesuaikan struktur ini dengan project kamu (mis. jika `/users/:userId/bookings` ada di controller terpisah).
