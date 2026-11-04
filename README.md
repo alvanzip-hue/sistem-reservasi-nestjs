@@ -2,10 +2,10 @@
 
 Kuis Proyek Individu • Sesi 5 • Praktek Pemrograman Web 3 (NestJS)
 
-| | |
-|---|---|
-| Nama | Alvan Dhan |
-| NIM | _(isi NIM)_ |
+|               |                                     |
+| ------------- | ----------------------------------- |
+| Nama          | Alvan Dhan                          |
+| NIM           | 240514004                           |
 | Program Studi | Sistem Informasi, IDE LPKIA Bandung |
 
 ## Deskripsi
@@ -31,32 +31,38 @@ Server berjalan di `http://localhost:3000`.
 
 ## Data Awal (Seed)
 
-| id | name | sportType | pricePerHour | status |
-|----|------|-----------|--------------|--------|
-| 1 | Lapangan Futsal A | futsal | 150000 | ACTIVE |
-| 2 | Lapangan Badminton 1 | badminton | 60000 | ACTIVE |
-| 3 | Lapangan Basket Indoor | basket | 200000 | MAINTENANCE |
+| id  | name                   | sportType | pricePerHour | status      |
+| --- | ---------------------- | --------- | ------------ | ----------- |
+| 1   | Lapangan Futsal A      | futsal    | 150000       | ACTIVE      |
+| 2   | Lapangan Badminton 1   | badminton | 60000        | ACTIVE      |
+| 3   | Lapangan Basket Indoor | basket    | 200000       | MAINTENANCE |
 
 > Sesuaikan tabel ini dengan data seed di source code kamu.
 
 ## Daftar Endpoint
 
-| Method | Endpoint | Fungsi |
-|--------|----------|--------|
-| GET | `/fields` | Daftar semua lapangan |
-| GET | `/fields/:id` | Detail satu lapangan |
-| GET | `/fields/:id/availability?date=YYYY-MM-DD` | Cek ketersediaan lapangan pada tanggal tertentu |
-| POST | `/bookings` | Membuat reservasi baru |
-| GET | `/bookings/:id` | Detail satu reservasi |
-| GET | `/users/:userId/bookings` | Daftar reservasi milik satu pengguna |
-| PATCH | `/bookings/:id/cancel` | Membatalkan reservasi |
+| Method | Endpoint                                   | Fungsi                                          |
+| ------ | ------------------------------------------ | ----------------------------------------------- |
+| GET    | `/fields`                                  | Daftar semua lapangan                           |
+| GET    | `/fields/:id`                              | Detail satu lapangan                            |
+| GET    | `/fields/:id/availability?date=YYYY-MM-DD` | Cek ketersediaan lapangan pada tanggal tertentu |
+| POST   | `/bookings`                                | Membuat reservasi baru                          |
+| GET    | `/bookings/:id`                            | Detail satu reservasi                           |
+| GET    | `/users/:userId/bookings`                  | Daftar reservasi milik satu pengguna            |
+| PATCH  | `/bookings/:id/cancel`                     | Membatalkan reservasi                           |
 
 ## Model Data
 
 **Field**
 
 ```json
-{ "id": 1, "name": "Lapangan Futsal A", "sportType": "futsal", "pricePerHour": 150000, "status": "ACTIVE" }
+{
+  "id": 1,
+  "name": "Lapangan Futsal A",
+  "sportType": "futsal",
+  "pricePerHour": 150000,
+  "status": "ACTIVE"
+}
 ```
 
 **Booking**
@@ -91,13 +97,13 @@ Status booking: `BOOKED`, `CANCELLED`, `COMPLETED`.
 
 ## Ringkasan Status Code
 
-| Kondisi | Status Code |
-|---------|-------------|
-| Data berhasil diambil / dibatalkan | `200 OK` |
-| Booking berhasil dibuat | `201 Created` |
-| Request body / query tidak valid | `400 Bad Request` |
-| Lapangan atau booking tidak ditemukan | `404 Not Found` |
-| Jadwal bentrok / booking sudah dibatalkan | `409 Conflict` |
+| Kondisi                                   | Status Code       |
+| ----------------------------------------- | ----------------- |
+| Data berhasil diambil / dibatalkan        | `200 OK`          |
+| Booking berhasil dibuat                   | `201 Created`     |
+| Request body / query tidak valid          | `400 Bad Request` |
+| Lapangan atau booking tidak ditemukan     | `404 Not Found`   |
+| Jadwal bentrok / booking sudah dibatalkan | `409 Conflict`    |
 
 Format response error yang dipakai:
 
@@ -115,9 +121,27 @@ Format response error yang dipakai:
 
 ```json
 [
-  { "id": 1, "name": "Lapangan Futsal A", "sportType": "futsal", "pricePerHour": 150000, "status": "ACTIVE" },
-  { "id": 2, "name": "Lapangan Badminton 1", "sportType": "badminton", "pricePerHour": 60000, "status": "ACTIVE" },
-  { "id": 3, "name": "Lapangan Basket Indoor", "sportType": "basket", "pricePerHour": 200000, "status": "MAINTENANCE" }
+  {
+    "id": 1,
+    "name": "Lapangan Futsal A",
+    "sportType": "futsal",
+    "pricePerHour": 150000,
+    "status": "ACTIVE"
+  },
+  {
+    "id": 2,
+    "name": "Lapangan Badminton 1",
+    "sportType": "badminton",
+    "pricePerHour": 60000,
+    "status": "ACTIVE"
+  },
+  {
+    "id": 3,
+    "name": "Lapangan Basket Indoor",
+    "sportType": "basket",
+    "pricePerHour": 200000,
+    "status": "MAINTENANCE"
+  }
 ]
 ```
 
@@ -126,7 +150,13 @@ Format response error yang dipakai:
 `GET /fields/2` → **`200 OK`**
 
 ```json
-{ "id": 2, "name": "Lapangan Badminton 1", "sportType": "badminton", "pricePerHour": 60000, "status": "ACTIVE" }
+{
+  "id": 2,
+  "name": "Lapangan Badminton 1",
+  "sportType": "badminton",
+  "pricePerHour": 60000,
+  "status": "ACTIVE"
+}
 ```
 
 `GET /fields/99` → **`404 Not Found`**
@@ -156,16 +186,17 @@ Setelah ada booking 18:00–19:00:
 {
   "fieldId": 2,
   "date": "2026-11-05",
-  "bookedSlots": [
-    { "bookingId": 1, "startTime": "18:00", "endTime": "19:00" }
-  ]
+  "bookedSlots": [{ "bookingId": 1, "startTime": "18:00", "endTime": "19:00" }]
 }
 ```
 
 Tanpa parameter `date` → **`400 Bad Request`**
 
 ```json
-{ "statusCode": 400, "message": "Query parameter 'date' wajib diisi dengan format YYYY-MM-DD" }
+{
+  "statusCode": 400,
+  "message": "Query parameter 'date' wajib diisi dengan format YYYY-MM-DD"
+}
 ```
 
 ### 4. POST /bookings
@@ -288,7 +319,10 @@ Jika pengguna belum punya reservasi, response berupa array kosong `[]` dengan st
 Dibatalkan dua kali → **`409 Conflict`**
 
 ```json
-{ "statusCode": 409, "message": "Booking dengan id 1 sudah dibatalkan sebelumnya" }
+{
+  "statusCode": 409,
+  "message": "Booking dengan id 1 sudah dibatalkan sebelumnya"
+}
 ```
 
 Booking tidak ada → **`404 Not Found`**
@@ -303,19 +337,19 @@ Booking tidak ada → **`404 Not Found`**
 
 Urutan pengujian (jalankan berurutan di Postman):
 
-| # | Skenario | Request | Hasil yang Diharapkan |
-|---|----------|---------|-----------------------|
-| 1 | Daftar lapangan | `GET /fields` | 200, daftar lapangan |
-| 2 | Cek ketersediaan awal | `GET /fields/2/availability?date=2026-11-05` | 200, `bookedSlots` kosong |
-| 3 | Booking berhasil | `POST /bookings` (18:00–19:00) | 201, status `BOOKED` |
-| 4 | Booking bentrok | `POST /bookings` (slot yang sama / beririsan) | 409 |
-| 5 | Lapangan tidak ditemukan | `POST /bookings` dengan `fieldId: 99` | 404 |
-| 6 | Booking tidak ditemukan | `GET /bookings/99` | 404 |
-| 7 | Cek ketersediaan setelah booking | `GET /fields/2/availability?date=2026-11-05` | 200, slot 18:00–19:00 muncul di `bookedSlots` |
-| 8 | Batalkan booking | `PATCH /bookings/1/cancel` | 200, status `CANCELLED` |
-| 9 | Cek ketersediaan setelah batal | `GET /fields/2/availability?date=2026-11-05` | 200, slot kembali tersedia |
-| 10 | Booking ulang di slot yang sama | `POST /bookings` (18:00–19:00) | 201 (slot sudah bebas lagi) |
-| 11 | Batalkan booking yang sudah batal | `PATCH /bookings/1/cancel` | 409 |
+| #   | Skenario                          | Request                                       | Hasil yang Diharapkan                         |
+| --- | --------------------------------- | --------------------------------------------- | --------------------------------------------- |
+| 1   | Daftar lapangan                   | `GET /fields`                                 | 200, daftar lapangan                          |
+| 2   | Cek ketersediaan awal             | `GET /fields/2/availability?date=2026-11-05`  | 200, `bookedSlots` kosong                     |
+| 3   | Booking berhasil                  | `POST /bookings` (18:00–19:00)                | 201, status `BOOKED`                          |
+| 4   | Booking bentrok                   | `POST /bookings` (slot yang sama / beririsan) | 409                                           |
+| 5   | Lapangan tidak ditemukan          | `POST /bookings` dengan `fieldId: 99`         | 404                                           |
+| 6   | Booking tidak ditemukan           | `GET /bookings/99`                            | 404                                           |
+| 7   | Cek ketersediaan setelah booking  | `GET /fields/2/availability?date=2026-11-05`  | 200, slot 18:00–19:00 muncul di `bookedSlots` |
+| 8   | Batalkan booking                  | `PATCH /bookings/1/cancel`                    | 200, status `CANCELLED`                       |
+| 9   | Cek ketersediaan setelah batal    | `GET /fields/2/availability?date=2026-11-05`  | 200, slot kembali tersedia                    |
+| 10  | Booking ulang di slot yang sama   | `POST /bookings` (18:00–19:00)                | 201 (slot sudah bebas lagi)                   |
+| 11  | Batalkan booking yang sudah batal | `PATCH /bookings/1/cancel`                    | 409                                           |
 
 ## Bukti Pengujian
 
